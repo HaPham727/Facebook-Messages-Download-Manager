@@ -5,8 +5,8 @@
 cmake_minimum_required(VERSION 4.2.3)
 
 # CTest Start Step
-set(CTEST_SOURCE_DIRECTORY "C:/Users/jcep/projects/Facebook-Messages-Download-Arranger")
-set(CTEST_BINARY_DIRECTORY "C:/Users/jcep/projects/Facebook-Messages-Download-Arranger/build")
+set(CTEST_SOURCE_DIRECTORY "C:/Users/jcep/projects/Facebook-Messages-Download-Manager")
+set(CTEST_BINARY_DIRECTORY "C:/Users/jcep/projects/Facebook-Messages-Download-Manager/build")
 
 # CTest Update Step
 set(CTEST_UPDATE_COMMAND "C:/Program Files/Git/cmd/git.exe")

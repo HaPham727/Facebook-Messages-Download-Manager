@@ -4,8 +4,8 @@
 
 
 # Configuration directories and files
-SourceDirectory: C:/Users/jcep/projects/Facebook-Messages-Download-Arranger
-BuildDirectory: C:/Users/jcep/projects/Facebook-Messages-Download-Arranger/build
+SourceDirectory: C:/Users/jcep/projects/Facebook-Messages-Download-Manager
+BuildDirectory: C:/Users/jcep/projects/Facebook-Messages-Download-Manager/build
 
 # Where to place the cost data store
 CostDataFile: 
@@ -27,7 +27,7 @@ SubmitInactivityTimeout:
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "C:/Program Files/CMake/bin/cmake.exe" "C:/Users/jcep/projects/Facebook-Messages-Download-Arranger"
+ConfigureCommand: "C:/Program Files/CMake/bin/cmake.exe" "C:/Users/jcep/projects/Facebook-Messages-Download-Manager"
 MakeCommand: "C:\Program Files\CMake\bin\cmake.exe" --build . --config "${CTEST_CONFIGURATION_TYPE}"
 DefaultCTestConfigurationType: Release
 

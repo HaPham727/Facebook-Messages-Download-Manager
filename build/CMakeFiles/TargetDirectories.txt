@@ -1,8 +1,8 @@
-C:/Users/jcep/projects/Facebook-Messages-Download-Arranger/build/CMakeFiles/Facebook-Messages-Download-Arranger.dir
-C:/Users/jcep/projects/Facebook-Messages-Download-Arranger/build/CMakeFiles/Experimental.dir
-C:/Users/jcep/projects/Facebook-Messages-Download-Arranger/build/CMakeFiles/Nightly.dir
-C:/Users/jcep/projects/Facebook-Messages-Download-Arranger/build/CMakeFiles/Continuous.dir
-C:/Users/jcep/projects/Facebook-Messages-Download-Arranger/build/CMakeFiles/NightlyMemoryCheck.dir
-C:/Users/jcep/projects/Facebook-Messages-Download-Arranger/build/CMakeFiles/RUN_TESTS.dir
-C:/Users/jcep/projects/Facebook-Messages-Download-Arranger/build/CMakeFiles/ALL_BUILD.dir
-C:/Users/jcep/projects/Facebook-Messages-Download-Arranger/build/CMakeFiles/ZERO_CHECK.dir
+C:/Users/jcep/projects/Facebook-Messages-Download-Manager/build/CMakeFiles/Facebook-Messages-Download-Manager.dir
+C:/Users/jcep/projects/Facebook-Messages-Download-Manager/build/CMakeFiles/Experimental.dir
+C:/Users/jcep/projects/Facebook-Messages-Download-Manager/build/CMakeFiles/Nightly.dir
+C:/Users/jcep/projects/Facebook-Messages-Download-Manager/build/CMakeFiles/Continuous.dir
+C:/Users/jcep/projects/Facebook-Messages-Download-Manager/build/CMakeFiles/NightlyMemoryCheck.dir
+C:/Users/jcep/projects/Facebook-Messages-Download-Manager/build/CMakeFiles/RUN_TESTS.dir
+C:/Users/jcep/projects/Facebook-Messages-Download-Manager/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/jcep/projects/Facebook-Messages-Download-Manager/build/CMakeFiles/ZERO_CHECK.dir

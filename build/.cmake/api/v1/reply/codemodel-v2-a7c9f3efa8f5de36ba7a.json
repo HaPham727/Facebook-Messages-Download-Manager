@@ -72,9 +72,9 @@
 				},
 				{
 					"directoryIndex" : 0,
-					"id" : "Facebook-Messages-Download-Arranger::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Facebook-Messages-Download-Arranger-Debug-27d3128b4e99d24221ab.json",
-					"name" : "Facebook-Messages-Download-Arranger",
+					"id" : "Facebook-Messages-Download-Manager::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Facebook-Messages-Download-Manager-Debug-27d3128b4e99d24221ab.json",
+					"name" : "Facebook-Messages-Download-Manager",
 					"projectIndex" : 0
 				},
 				{
@@ -171,9 +171,9 @@
 				},
 				{
 					"directoryIndex" : 0,
-					"id" : "Facebook-Messages-Download-Arranger::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Facebook-Messages-Download-Arranger-Release-9a14ff3d5d3dea6e3eac.json",
-					"name" : "Facebook-Messages-Download-Arranger",
+					"id" : "Facebook-Messages-Download-Manager::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Facebook-Messages-Download-Manager-Release-9a14ff3d5d3dea6e3eac.json",
+					"name" : "Facebook-Messages-Download-Manager",
 					"projectIndex" : 0
 				},
 				{
@@ -270,9 +270,9 @@
 				},
 				{
 					"directoryIndex" : 0,
-					"id" : "Facebook-Messages-Download-Arranger::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Facebook-Messages-Download-Arranger-MinSizeRel-6b7e0f778dfebe83d0ff.json",
-					"name" : "Facebook-Messages-Download-Arranger",
+					"id" : "Facebook-Messages-Download-Manager::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Facebook-Messages-Download-Manager-MinSizeRel-6b7e0f778dfebe83d0ff.json",
+					"name" : "Facebook-Messages-Download-Manager",
 					"projectIndex" : 0
 				},
 				{
@@ -369,9 +369,9 @@
 				},
 				{
 					"directoryIndex" : 0,
-					"id" : "Facebook-Messages-Download-Arranger::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Facebook-Messages-Download-Arranger-RelWithDebInfo-5c212a82a2e98b9adf0b.json",
-					"name" : "Facebook-Messages-Download-Arranger",
+					"id" : "Facebook-Messages-Download-Manager::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Facebook-Messages-Download-Manager-RelWithDebInfo-5c212a82a2e98b9adf0b.json",
+					"name" : "Facebook-Messages-Download-Manager",
 					"projectIndex" : 0
 				},
 				{
@@ -401,8 +401,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/jcep/projects/Facebook-Messages-Download-Arranger/build",
-		"source" : "C:/Users/jcep/projects/Facebook-Messages-Download-Arranger"
+		"build" : "C:/Users/jcep/projects/Facebook-Messages-Download-Manager/build",
+		"source" : "C:/Users/jcep/projects/Facebook-Messages-Download-Manager"
 	},
 	"version" : 
 	{

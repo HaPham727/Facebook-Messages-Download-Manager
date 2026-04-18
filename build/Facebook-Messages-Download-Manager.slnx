@@ -8,7 +8,7 @@
 		<Platform Name="x64"/>
 	</Configurations>
 	<Project Path="ALL_BUILD.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="3cd19af8-17fa-3f12-9ddc-083bc31d3357" DefaultStartup="true">
-		<BuildDependency Project="Facebook-Messages-Download-Arranger.vcxproj"/>
+		<BuildDependency Project="Facebook-Messages-Download-Manager.vcxproj"/>
 		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
 		<Build Solution="Debug|*" Project="false"/>
 		<Build Solution="Release|*" Project="false"/>
@@ -29,7 +29,7 @@
 		<Build Solution="MinSizeRel|*" Project="false"/>
 		<Build Solution="RelWithDebInfo|*" Project="false"/>
 	</Project>
-	<Project Path="Facebook-Messages-Download-Arranger.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="88820f4a-b04c-3c09-822c-e3aa502bb8ab">
+	<Project Path="Facebook-Messages-Download-Manager.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="88820f4a-b04c-3c09-822c-e3aa502bb8ab">
 		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
 	</Project>
 	<Project Path="Nightly.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="8da9dcbb-81a5-3bdf-ad1f-a962c66400da">

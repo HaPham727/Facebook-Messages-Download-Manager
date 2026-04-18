@@ -22,7 +22,7 @@
 	"dependencies" : 
 	[
 		{
-			"id" : "Facebook-Messages-Download-Arranger::@6890427a1f51a3e7e1df"
+			"id" : "Facebook-Messages-Download-Manager::@6890427a1f51a3e7e1df"
 		},
 		{
 			"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df"
@@ -34,7 +34,7 @@
 	"orderDependencies" : 
 	[
 		{
-			"id" : "Facebook-Messages-Download-Arranger::@6890427a1f51a3e7e1df"
+			"id" : "Facebook-Messages-Download-Manager::@6890427a1f51a3e7e1df"
 		}
 	],
 	"paths" : 

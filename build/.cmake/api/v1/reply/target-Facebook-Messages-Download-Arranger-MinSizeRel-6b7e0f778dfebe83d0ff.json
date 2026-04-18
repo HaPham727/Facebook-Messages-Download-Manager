@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "MinSizeRel/Facebook-Messages-Download-Arranger.exe"
+			"path" : "MinSizeRel/Facebook-Messages-Download-Manager.exe"
 		},
 		{
-			"path" : "MinSizeRel/Facebook-Messages-Download-Arranger.pdb"
+			"path" : "MinSizeRel/Facebook-Messages-Download-Manager.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -67,7 +67,7 @@
 			"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df"
 		}
 	],
-	"id" : "Facebook-Messages-Download-Arranger::@6890427a1f51a3e7e1df",
+	"id" : "Facebook-Messages-Download-Manager::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -91,8 +91,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "Facebook-Messages-Download-Arranger",
-	"nameOnDisk" : "Facebook-Messages-Download-Arranger.exe",
+	"name" : "Facebook-Messages-Download-Manager",
+	"nameOnDisk" : "Facebook-Messages-Download-Manager.exe",
 	"paths" : 
 	{
 		"build" : ".",
