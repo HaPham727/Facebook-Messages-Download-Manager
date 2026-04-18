@@ -6,12 +6,7 @@
 #include <unordered_set>
 #include <assert.h>
 
-
 namespace fs = std::filesystem;
-
-//Standard:
-//functionName() = camelCase
-//variable_name = snake_case
 
 //Path of folder holding only unzipped Facebook dowload packages
 const fs::path starting_file_path = "E:\\Facebook-Info\\Full-Time-Messages";
@@ -19,12 +14,11 @@ const fs::path starting_file_path = "E:\\Facebook-Info\\Full-Time-Messages";
 //Path of folder to sort messages & media into 
 const fs::path final_file_path = "E:\\Facebook-Info\\Sorted-Messages";
 
-bool toCopyOrToNotCopy = false;
+bool copy_or_nah = false;
 
 fs::path messages_file_path{};
 
 const auto copy_options = fs::copy_options::skip_existing
-                        | fs::copy_options::recursive
                         ;
 
 fs::path concatPath(fs::path in_path, fs::path dir)
@@ -65,12 +59,7 @@ int main()
                 {
                     fs::path group_dir_path = group_dir_iterator.path();
 
-                    //std::cout << "Currently at: " << group_dir_path.parent_path().filename() << '\n';
-                    //std::cout << "Currently at: " << getLastDir(group_dir_path) << '\n';
-
-                    //if (!m.contains(getLastDir(group_dir_path)))
                     group_and_dirs[getLastDir(group_dir_path)].emplace_back(group_dir_path);
-                    //else
                 }
             }
         }
@@ -104,26 +93,6 @@ int main()
             //std::cout << '\n' << '\n';
         }
 
-        //Media debug
-        for (const auto & [group, medias] : group_and_media) 
-        {
-            std::cout << "Medias for group " << group << " are as follows: " << '\n';
-
-            bool check = true;
-            for (const auto& m : medias) 
-            {
-                if (check)
-                {
-                    std::cout << '\n';
-                    check = false;                    
-                }
-
-                std::cout << m << " ";
-            }
-
-            std::cout << '\n' << '\n';
-        }
-
         //Copy messages and media to final file
         //For each group
         for (const auto & [group, dirs] : group_and_dirs)
@@ -150,7 +119,7 @@ int main()
                 {
                     fs::path from_media_path = concatPath(dirs[i], m);
                     //Check if the media type exists in the FROM dir
-                    if (fs::exists(from_media_path) && toCopyOrToNotCopy)
+                    if (fs::exists(from_media_path) && copy_or_nah)
                         fs::copy(from_media_path, to_media_path, copy_options);
                 }
             }
