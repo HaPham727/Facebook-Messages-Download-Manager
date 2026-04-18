@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\jcep\projects\Facebook-Messages-Download-Arranger\build\CMakeFiles\be097002c860dd721b1662f19e2528ba\Experimental.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\jcep\projects\Facebook-Messages-Download-Arranger\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\jcep\projects\Facebook-Messages-Download-Arranger\build\CMakeFiles\Experimental" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{CFD3EECA-B612-3B2D-946D-CD3ACE6B2E9E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

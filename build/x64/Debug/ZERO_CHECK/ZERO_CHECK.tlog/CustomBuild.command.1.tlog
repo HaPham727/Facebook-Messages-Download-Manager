@@ -1,0 +1,10 @@
+^C:\USERS\JCEP\PROJECTS\FACEBOOK-MESSAGES-DOWNLOAD-ARRANGER\BUILD\CMAKEFILES\BE097002C860DD721B1662F19E2528BA\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/jcep/projects/Facebook-Messages-Download-Arranger -BC:/Users/jcep/projects/Facebook-Messages-Download-Arranger/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/jcep/projects/Facebook-Messages-Download-Arranger/build/Facebook-Messages-Download-Arranger.slnx
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
