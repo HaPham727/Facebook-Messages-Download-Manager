@@ -19,6 +19,8 @@ const fs::path starting_file_path = "E:\\Facebook-Info\\Full-Time-Messages";
 //Path of folder to sort messages & media into 
 const fs::path final_file_path = "E:\\Facebook-Info\\Sorted-Messages";
 
+bool toCopyOrToNotCopy = false;
+
 fs::path messages_file_path{};
 
 const auto copy_options = fs::copy_options::skip_existing
@@ -29,12 +31,6 @@ fs::path concatPath(fs::path in_path, fs::path dir)
 {
     fs::path out_path = in_path;
     return out_path /= dir;
-}
-
-fs::path concatPath(fs::path in_path, fs::path dir1, fs::path dir2)
-{
-    fs::path out_path = in_path;
-    return (out_path /= dir1) /= dir2;
 }
 
 //Turns the package's path into the path to the inbox directory (destination)
@@ -154,7 +150,7 @@ int main()
                 {
                     fs::path from_media_path = concatPath(dirs[i], m);
                     //Check if the media type exists in the FROM dir
-                    if (fs::exists(from_media_path))
+                    if (fs::exists(from_media_path) && toCopyOrToNotCopy)
                         fs::copy(from_media_path, to_media_path, copy_options);
                 }
             }
