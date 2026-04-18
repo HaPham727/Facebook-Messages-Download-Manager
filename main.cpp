@@ -73,24 +73,16 @@ int main()
                 fs::create_directory(group);
             fs::current_path(concatPath(final_file_path, group));
 
-            //std::cout << "Paths for group " << group << " are as follows: " << '\n';
-
             for (auto i{0uz}; i < dirs.size(); i++)
             {
-                //if (i != 0)
-                //    std::cout << '\n';
-                //std::cout << dirs[i];
-
                 for (auto const& group_media_iterator : fs::directory_iterator{group_and_dirs[group][i]}) 
                 {
                     fs::path group_media_path = group_media_iterator.path();
                     if (getLastDir(group_media_path) != "message_1.html")
                         group_and_media[group].insert(getLastDir(group_media_path));
-                    //HERE IS WHERE I ADD CONDITION TO SAVE THE PATH OF THE PACKAGE THAT HOLDS MESSAGES
+                    //HERE IS WHERE I ADD CONDITION TO SAVE THE PATH OF THE PACKAGE THAT HOLDS END-TO-END ENCRYPTED MESSAGES
                 }
             }
-
-            //std::cout << '\n' << '\n';
         }
 
         //Copy messages and media to final file
