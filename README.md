@@ -24,7 +24,7 @@ This repo contains a guide to download and sort your Facebook messages using thi
   - Download the .zip file from this repo.
   - Extract all.
   - Open main.cpp in an IDE.
-  - Set 'starting_file_path' to the path of the file containing the unzipped downloads from Facebook.
-  - Set 'starting_file_path' to the path of the file to contain the sorted dowloads.
-  - Set 'toCopyOrToNotCopy' to 'true'.
+  - Set `starting_file_path` to the path of the file containing the unzipped downloads from Facebook.
+  - Set `starting_file_path` to the path of the file to contain the sorted dowloads.
+  - Set `toCopyOrToNotCopy` to `true`.
   - Build and run main.cpp.
