@@ -743,7 +743,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "Facebook-Messages-Download-Arranger"
+			"value" : "Facebook-Messages-Download-Manager"
 		},
 		{
 			"name" : "CMAKE_PROJECT_SPDX_LICENSE",
@@ -1306,6 +1306,42 @@
 			"value" : "C:/Users/jcep/projects/Facebook-Messages-Download-Arranger"
 		},
 		{
+			"name" : "Facebook-Messages-Download-Manager_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "C:/Users/jcep/projects/Facebook-Messages-Download-Arranger/build"
+		},
+		{
+			"name" : "Facebook-Messages-Download-Manager_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "ON"
+		},
+		{
+			"name" : "Facebook-Messages-Download-Manager_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "C:/Users/jcep/projects/Facebook-Messages-Download-Arranger"
+		},
+		{
 			"name" : "GITCOMMAND",
 			"properties" : 
 			[
@@ -1315,11 +1351,11 @@
 				},
 				{
 					"name" : "HELPSTRING",
-					"value" : ""
+					"value" : "Path to a program."
 				}
 			],
-			"type" : "UNINITIALIZED",
-			"value" : ""
+			"type" : "FILEPATH",
+			"value" : "C:/Program Files/Git/cmd/git.exe"
 		},
 		{
 			"name" : "HGCOMMAND",
