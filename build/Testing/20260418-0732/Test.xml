@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Site BuildName="Win32-MSBuild"
+<Site BuildName="Win32-mingw32-make"
 	BuildStamp="20260418-0732-Experimental"
 	Name="LAPTOP-4G8IDKHU"
 	Generator="ctest-4.2.3"
-	CompilerName="C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/cl.exe"
-	CompilerVersion="19.50.35729.0"
+	CompilerName="C:/ProgramData/mingw64/mingw64/bin/g++.exe"
+	CompilerVersion="15.2.0"
 	OSName="Windows"
 	Hostname="LAPTOP-4G8IDKHU"
 	OSRelease="10.0.26200"
@@ -19,17 +19,17 @@
 	ProcessorCacheSize="-1"
 	NumberOfLogicalCPU="8"
 	NumberOfPhysicalCPU="4"
-	TotalVirtualMemory="23834"
+	TotalVirtualMemory="25316"
 	TotalPhysicalMemory="8029"
 	LogicalProcessorsPerPhysical="2"
 	ProcessorClockFrequency="2496"
 	>
 	<Testing>
-		<StartDateTime>Apr 18 20:56 SE Asia Standard Time</StartDateTime>
-		<StartTestTime>1776520590</StartTestTime>
+		<StartDateTime>Apr 21 20:26 SE Asia Standard Time</StartDateTime>
+		<StartTestTime>1776777982</StartTestTime>
 		<TestList/>
-		<EndDateTime>Apr 18 20:56 SE Asia Standard Time</EndDateTime>
-		<EndTestTime>1776520590</EndTestTime>
+		<EndDateTime>Apr 21 20:26 SE Asia Standard Time</EndDateTime>
+		<EndTestTime>1776777982</EndTestTime>
 		<ElapsedMinutes>0</ElapsedMinutes>
 	</Testing>
 </Site>

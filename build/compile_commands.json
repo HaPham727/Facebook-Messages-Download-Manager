@@ -1,0 +1,8 @@
+[
+{
+  "directory": "C:/Users/jcep/projects/Facebook-Messages-Download-Manager/build",
+  "command": "C:\\ProgramData\\mingw64\\mingw64\\bin\\g++.exe   -g -std=gnu++26 -o CMakeFiles\\Facebook-Messages-Download-Manager.dir\\main.cpp.obj -c C:\\Users\\jcep\\projects\\Facebook-Messages-Download-Manager\\main.cpp",
+  "file": "C:/Users/jcep/projects/Facebook-Messages-Download-Manager/main.cpp",
+  "output": "CMakeFiles/Facebook-Messages-Download-Manager.dir/main.cpp.obj"
+}
+]

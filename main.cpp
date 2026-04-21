@@ -1,5 +1,4 @@
 #include <iostream>
-#include <fstream>
 #include <filesystem>
 #include <unordered_map>
 #include <vector>
@@ -9,17 +8,17 @@
 namespace fs = std::filesystem;
 
 //Path of folder holding only unzipped Facebook dowload packages
-const fs::path starting_file_path = "E:\\Facebook-Info\\Full-Time-Messages";
+const fs::path start_path = "E:\\Facebook-Info\\Full-Time-Messages";
 
 //Path of folder to sort messages & media into 
-const fs::path final_file_path = "E:\\Facebook-Info\\Sorted-Messages";
+const fs::path final_path = "E:\\Facebook-Info\\test";
 
+//Do you want to copy 
 bool copy_or_nah = false;
 
 fs::path messages_file_path{};
 
-const auto copy_options = fs::copy_options::skip_existing
-                        ;
+const auto copy_options = fs::copy_options::skip_existing;
 
 fs::path concatPath(fs::path in_path, fs::path dir)
 {
@@ -28,7 +27,7 @@ fs::path concatPath(fs::path in_path, fs::path dir)
 }
 
 //Turns the package's path into the path to the inbox directory (destination)
-fs::path concatPathToDest(fs::path curr_path)
+fs::path concatPathToInbox(fs::path curr_path)
 {
     return concatPath(curr_path, "your_facebook_activity\\messages\\inbox");
 }
@@ -41,82 +40,56 @@ fs::path getLastDir(fs::path dir_path)
     return dir_path.parent_path().filename();
 }
 
+
 int main()
 {
-    if (fs::exists(starting_file_path) && !starting_file_path.empty() && fs::exists(final_file_path)) 
+    if (fs::exists(start_path) && !start_path.empty() && fs::exists(final_path)) 
     {
-        std::unordered_map<fs::path, std::vector<fs::path>> group_and_dirs;
-        std::unordered_map<fs::path, std::unordered_set<fs::path>> group_and_media;
+        std::cout << "Working";
 
-        //Store the name and paths of groups
-        for (auto const& dir_iterator : fs::directory_iterator{starting_file_path}) 
+        for (const auto& package_iterator : fs::directory_iterator{start_path}) 
         {
-            fs::path curr_path = concatPathToDest(dir_iterator.path());
+            std::cout << '.';
 
-            if (fs::exists(curr_path))
+            fs::path inbox_path = concatPathToInbox(package_iterator.path());
+
+            if (fs::exists(inbox_path))
             {
-                for (auto const& group_dir_iterator : fs::directory_iterator{curr_path}) 
+                for (auto const& group_iterator : fs::directory_iterator{inbox_path}) 
                 {
-                    fs::path group_dir_path = group_dir_iterator.path();
+                    fs::path group_start_path = group_iterator.path();
+                    fs::path curr_group = getLastDir(group_start_path);
+                    fs::path group_final_path = concatPath(final_path, curr_group);
 
-                    group_and_dirs[getLastDir(group_dir_path)].emplace_back(group_dir_path);
+                    fs::current_path(final_path);
+                    fs::create_directory(curr_group);
+
+                    for (auto const& media_iterator : fs::directory_iterator{group_start_path}) 
+                    {
+                        fs::path media_group_start_path = media_iterator.path();
+                        fs::path curr_media = getLastDir(media_group_start_path); 
+                        fs::path media_group_final_path = concatPath(group_final_path, curr_media);
+
+                        if (curr_media != "message_1.html")
+                        {
+                            fs::current_path(group_final_path);
+
+                            if (!fs::exists(media_group_final_path))
+                                fs::create_directory(curr_media);
+
+                            if (fs::exists(media_group_start_path) && copy_or_nah)
+                                fs::copy(media_group_start_path, media_group_final_path, copy_options);
+                        }
+                        else
+                            if (fs::exists(media_group_start_path) && fs::exists(group_final_path))
+                                fs::copy(media_group_start_path, group_final_path, copy_options);
+                    }
                 }
             }
+            else
+                std::cout << "\nThe package " << inbox_path << " doesn't have the expected format." << '\n';
         }
 
-        //Create folders for groups and media types at the final file path 
-        fs::current_path(final_file_path);
-        for (const auto & [group, dirs] : group_and_dirs) 
-        {
-            fs::current_path(final_file_path);
-            if (!fs::exists(concatPath(final_file_path, group)))
-                fs::create_directory(group);
-            fs::current_path(concatPath(final_file_path, group));
-
-            for (auto i{0uz}; i < dirs.size(); i++)
-            {
-                for (auto const& group_media_iterator : fs::directory_iterator{group_and_dirs[group][i]}) 
-                {
-                    fs::path group_media_path = group_media_iterator.path();
-                    if (getLastDir(group_media_path) != "message_1.html")
-                        group_and_media[group].insert(getLastDir(group_media_path));
-                    //HERE IS WHERE I ADD CONDITION TO SAVE THE PATH OF THE PACKAGE THAT HOLDS END-TO-END ENCRYPTED MESSAGES
-                }
-            }
-        }
-
-        //Copy messages and media to final file
-        //For each group
-        for (const auto & [group, dirs] : group_and_dirs)
-        {
-            fs::path curr_path = concatPath(final_file_path, group);
-
-            assert(fs::exists(curr_path));
-
-            //For each media type the group has been known to have
-            for (const auto& m : group_and_media[group]) 
-            {
-                //Make sure to goto final group dir
-                fs::current_path(curr_path);
-
-                //Make media path inside final group dir
-                fs::path to_media_path = concatPath(curr_path, m);
-
-                //Check if the dir for media type exists yet, if not, create it
-                if (!fs::exists(to_media_path))
-                    fs::create_directory(m);
-
-                //For each from dir
-                for (int i{0uz}; i < dirs.size(); i++)
-                {
-                    fs::path from_media_path = concatPath(dirs[i], m);
-                    //Check if the media type exists in the FROM dir
-                    if (fs::exists(from_media_path) && copy_or_nah)
-                        fs::copy(from_media_path, to_media_path, copy_options);
-                }
-            }
-        }
-
-        std::cout << "Done!";
+        std::cout << "\nDone!";
     }
 }
