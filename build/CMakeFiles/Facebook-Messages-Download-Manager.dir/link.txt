@@ -1,3 +1,0 @@
-"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\Facebook-Messages-Download-Manager.dir/objects.a
-C:\ProgramData\mingw64\mingw64\bin\ar.exe qc CMakeFiles\Facebook-Messages-Download-Manager.dir/objects.a @CMakeFiles\Facebook-Messages-Download-Manager.dir\objects1.rsp
-C:\ProgramData\mingw64\mingw64\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\Facebook-Messages-Download-Manager.dir/objects.a -Wl,--no-whole-archive -o Facebook-Messages-Download-Manager.exe -Wl,--out-implib,libFacebook-Messages-Download-Manager.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Facebook-Messages-Download-Manager.dir\linkLibs.rsp
