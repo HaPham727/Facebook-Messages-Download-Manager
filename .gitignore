@@ -1,5 +1,5 @@
 ## Misc artifacts
-.vscode
+.vscode/*
 .vcxproj
 
 ## General build artifacts
