@@ -89,7 +89,7 @@ int main()
                     {
                         fs::current_path(group_final_path);
 
-                        if (!fs::exists(media_group_final_path))
+                        if (!fs::exists(media_group_final_path) && option_bool)
                             fs::create_directory(curr_media);
 
                         if (fs::exists(media_group_start_path) && option_bool)
