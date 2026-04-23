@@ -14,7 +14,6 @@ This repo contains a guide to download and sort your Facebook messages using thi
   - Pick the profile from which you'd like to export.
   - Pick "Export to device".
   - Under "Confirm your export", open "Customize information" and "Clear all" other than "Messages" and press "Save".
-  - "Format" should be set to HTML.
   - Press "Start export" and wait for Facebook to notify you via Email or Facebook notifications.
   - Once the download is available, create a folder on your PC to hold all the .zip files.
   - Once the download is finished, "Extract all" of the .zip files and delete them.
@@ -24,7 +23,6 @@ This repo contains a guide to download and sort your Facebook messages using thi
   - Download the .zip file from this repo.
   - Extract all.
   - Open main.cpp in an IDE.
-  - Set `start_path` to the path of the file containing the unzipped downloads from Facebook.
-  - Set `final_path` to the path of the file to contain the sorted dowloads.
-  - Set `copy_or_nah` to `true`.
-  - Build and run main.cpp.
+  - Build and run main.cpp
+  - Copy & paste paths for starting and final folders. 
+  - Choose whether to copy media and end-to-end-encrypted chats to final folder.
