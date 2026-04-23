@@ -1,29 +1,29 @@
+#include <chrono>
 #include <iostream>
 #include <filesystem>
 #include <string>
 
 namespace fs = std::filesystem;
 
-fs::path concatPath(fs::path in_path, fs::path dir)
+fs::path getLastDir(fs::path p)
 {
-    fs::path out_path = in_path;
-    return out_path /= dir;
+    p += "\\";
+    return p.parent_path().filename();
 }
 
-fs::path concatPathToInbox(fs::path curr_path)
+fs::path concatPath(fs::path p, fs::path d)
 {
-    return concatPath(curr_path, "your_facebook_activity\\messages\\inbox");
+    return (p / d);
 }
 
-fs::path concatPathToE2EE(fs::path curr_path)
+fs::path concatPathToInbox(fs::path p)
 {
-    return concatPath(curr_path, "your_facebook_activity\\messages\\e2ee_cutover");
+    return concatPath(p, "your_facebook_activity\\messages\\inbox");
 }
 
-fs::path getLastDir(fs::path dir_path)
+fs::path concatPathToE2EE(fs::path p)
 {
-    dir_path += "\\";
-    return dir_path.parent_path().filename();
+    return concatPath(p, "your_facebook_activity\\messages\\e2ee_cutover");
 }
 
 bool pathExists(std::string str)
@@ -48,11 +48,13 @@ bool isMessageFile(fs::path p)
 
 int main()
 {
-    std::string start_string, final_string, option_string, e2ee_string;
+    auto start = std::chrono::high_resolution_clock::now();
+
+    std::string start_string, final_string, media_string, e2ee_string;
     fs::path start_path, final_path;
     fs::copy_options message_copy_options = fs::copy_options::skip_existing;
     fs::copy_options media_copy_options = fs::copy_options::skip_existing | fs::copy_options::recursive;
-    bool option_bool, e2ee_bool;
+    bool media_bool, e2ee_bool;
 
     do {
         std::cout << "Enter path to starting folder: ";
@@ -66,15 +68,15 @@ int main()
 
     do {
         std::cout << "Do you want to copy media? [y/N] ";
-    } while (std::getline(std::cin, option_string) && !optionIsValid(option_string));
-    option_bool = setOption(option_string);
+    } while (std::getline(std::cin, media_string) && !optionIsValid(media_string));
+    media_bool = setOption(media_string);
 
     do {
         std::cout << "Do you want to copy End-to-end-encrypted chats? [y/N] ";
     } while (std::getline(std::cin, e2ee_string) && !optionIsValid(e2ee_string));
     e2ee_bool = setOption(e2ee_string);
     
-    std::cout << "Copying Facebook " << (option_bool ? "media and messages" : "messsages") << (e2ee_bool ? " (including end-to-end-encrypted chats)" : "") << " from " << start_path << " to " << final_path << ".\n" << "Working";
+    std::cout << "Copying Facebook " << (media_bool ? "media and messages" : "messsages") << (e2ee_bool ? " (including end-to-end-encrypted chats)" : "") << " from " << start_path << " to " << final_path << ".\n" << "Working";
 
     for (const auto& package_iterator : fs::directory_iterator{start_path}) 
     {
@@ -100,7 +102,7 @@ int main()
 
                     if (isMessageFile(media_group_start_path))
                         fs::copy(media_group_start_path, group_final_path, message_copy_options);
-                    else if (option_bool)
+                    else if (media_bool)
                     {
                         if (!fs::exists(media_group_final_path))
                             fs::create_directory(media_group_final_path);
@@ -141,8 +143,10 @@ int main()
             }
         }
     }
+    
+    auto stop = std::chrono::high_resolution_clock::now();
 
-    std::cout << "\nDone!";
+    std::cout << "\nFinished after " << duration_cast<std::chrono::seconds>(stop - start) << "!";
 
     return 0;
 }
