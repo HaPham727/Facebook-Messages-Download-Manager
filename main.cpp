@@ -1,6 +1,5 @@
 #include <iostream>
 #include <filesystem>
-#include <sstream>
 #include <string>
 
 namespace fs = std::filesystem;
@@ -89,32 +88,24 @@ int main()
             for (const auto& group_iterator : fs::directory_iterator{inbox_path}) 
             {
                 fs::path group_start_path = group_iterator.path();
-                fs::path curr_group = getLastDir(group_start_path);
-                fs::path group_final_path = concatPath(final_path, curr_group);
+                fs::path group_final_path = concatPath(final_path, getLastDir(group_start_path));
 
                 if (!fs::exists(group_final_path))
-                {
-                    fs::current_path(final_path);
-                    fs::create_directory(curr_group);
-                }
+                    fs::create_directory(group_final_path);
 
                 for (const auto& media_iterator : fs::directory_iterator{group_start_path}) 
                 {
                     fs::path media_group_start_path = media_iterator.path();
-                    fs::path curr_media = getLastDir(media_group_start_path); 
-                    fs::path media_group_final_path = concatPath(group_final_path, curr_media);
+                    fs::path media_group_final_path = concatPath(group_final_path, getLastDir(media_group_start_path));
 
-                    if (isMessageFile(curr_media))
+                    if (isMessageFile(media_group_start_path))
                         fs::copy(media_group_start_path, group_final_path, message_copy_options);
                     else if (option_bool)
                     {
-                        fs::current_path(group_final_path);
-
                         if (!fs::exists(media_group_final_path))
-                            fs::create_directory(curr_media);
+                            fs::create_directory(media_group_final_path);
 
-                        if (fs::exists(media_group_start_path))
-                            fs::copy(media_group_start_path, media_group_final_path, media_copy_options);
+                        fs::copy(media_group_start_path, media_group_final_path, media_copy_options);
                     }
                 }
             }
@@ -127,32 +118,24 @@ int main()
             for (const auto& chat_iterator : fs::directory_iterator{e2ee_path})
             {
                 fs::path chat_start_path = chat_iterator.path();
-                fs::path curr_chat = getLastDir(chat_start_path);
-                fs::path chat_final_path = concatPath(final_path, curr_chat);
+                fs::path chat_final_path = concatPath(final_path, getLastDir(chat_start_path));
 
                 if (!fs::exists(chat_final_path))
-                {
-                    fs::current_path(final_path);
-                    fs::create_directory(curr_chat);
-                }
+                    fs::create_directory(chat_final_path);
 
                 for (const auto& media_iterator : fs::directory_iterator{chat_start_path}) 
                 {
                     fs::path media_chat_start_path = media_iterator.path();
-                    fs::path curr_media = getLastDir(media_chat_start_path); 
-                    fs::path media_chat_final_path = concatPath(chat_final_path, curr_media);
+                    fs::path media_chat_final_path = concatPath(chat_final_path, getLastDir(media_chat_start_path));
 
-                    if (isMessageFile(curr_media))
+                    if (isMessageFile(media_chat_start_path))
                         fs::copy(media_chat_start_path, chat_final_path, message_copy_options);
                     else 
                     {
-                        fs::current_path(chat_final_path);
-
                         if (!fs::exists(media_chat_final_path))
-                            fs::create_directory(curr_media);
+                            fs::create_directory(media_chat_final_path);
 
-                        if (fs::exists(media_chat_start_path))
-                            fs::copy(media_chat_start_path, media_chat_final_path, media_copy_options);
+                        fs::copy(media_chat_start_path, media_chat_final_path, media_copy_options);
                     }
                 }
             }
