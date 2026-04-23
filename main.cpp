@@ -51,6 +51,8 @@ int main()
 {
     std::string start_string, final_string, option_string, e2ee_string;
     fs::path start_path, final_path;
+    fs::copy_options message_copy_options = fs::copy_options::skip_existing;
+    fs::copy_options media_copy_options = fs::copy_options::skip_existing | fs::copy_options::recursive;
     bool option_bool, e2ee_bool;
 
     do {
@@ -80,6 +82,7 @@ int main()
         std::cout << '.';
 
         fs::path inbox_path = concatPathToInbox(package_iterator.path());
+        fs::path e2ee_path = concatPathToE2EE(package_iterator.path());
 
         if (fs::exists(inbox_path))
         {
@@ -102,7 +105,7 @@ int main()
                     fs::path media_group_final_path = concatPath(group_final_path, curr_media);
 
                     if (isMessageFile(curr_media))
-                        fs::copy(media_group_start_path, group_final_path, fs::copy_options::skip_existing);
+                        fs::copy(media_group_start_path, group_final_path, message_copy_options);
                     else if (option_bool)
                     {
                         fs::current_path(group_final_path);
@@ -111,15 +114,13 @@ int main()
                             fs::create_directory(curr_media);
 
                         if (fs::exists(media_group_start_path))
-                            fs::copy(media_group_start_path, media_group_final_path, fs::copy_options::skip_existing);
+                            fs::copy(media_group_start_path, media_group_final_path, media_copy_options);
                     }
                 }
             }
         }
         else
             std::cout << "\nThe package " << inbox_path << " doesn't have the expected format." << "\nContinuing.";
-
-        fs::path e2ee_path = concatPathToE2EE(package_iterator.path());
 
         if (e2ee_bool && fs::exists(e2ee_path))
         {
@@ -142,7 +143,7 @@ int main()
                     fs::path media_chat_final_path = concatPath(chat_final_path, curr_media);
 
                     if (isMessageFile(curr_media))
-                        fs::copy(media_chat_start_path, chat_final_path, fs::copy_options::skip_existing);
+                        fs::copy(media_chat_start_path, chat_final_path, message_copy_options);
                     else 
                     {
                         fs::current_path(chat_final_path);
@@ -151,7 +152,7 @@ int main()
                             fs::create_directory(curr_media);
 
                         if (fs::exists(media_chat_start_path))
-                            fs::copy(media_chat_start_path, media_chat_final_path, fs::copy_options::skip_existing);
+                            fs::copy(media_chat_start_path, media_chat_final_path, media_copy_options);
                     }
                 }
             }
