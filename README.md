@@ -1,5 +1,5 @@
 # Facebook Messages Download Manager
-A small program to sort your downloaded Facebook messages by groups/users (NOT YET including end-to-end encrypted chats). 
+A small program to sort your exported Facebook messages by groups and users.
 
 This repo contains a guide to download and sort your Facebook messages using this program.
 
