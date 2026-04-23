@@ -16,6 +16,11 @@ fs::path concatPathToInbox(fs::path curr_path)
     return concatPath(curr_path, "your_facebook_activity\\messages\\inbox");
 }
 
+fs::path concatPathToE2EE(fs::path curr_path)
+{
+    return concatPath(curr_path, "your_facebook_activity\\messages\\e2ee_cutover");
+}
+
 fs::path getLastDir(fs::path dir_path)
 {
     dir_path += "\\";
@@ -34,14 +39,19 @@ bool optionIsValid(std::string_view opt)
 
 bool setOption(std::string_view opt)
 {
-    return (opt == "y" || opt == "Y") ? true : false;
+    return ((opt == "y" || opt == "Y") ? true : false);
+}
+
+bool isMessageFile(fs::path p)
+{
+    return (p.extension() == ".html" || p.extension() == ".json");
 }
 
 int main()
 {
-    std::string start_string, final_string, option_string;
+    std::string start_string, final_string, option_string, e2ee_string;
     fs::path start_path, final_path;
-    bool option_bool;
+    bool option_bool, e2ee_bool;
 
     do {
         std::cout << "Enter path to starting folder: ";
@@ -57,10 +67,13 @@ int main()
         std::cout << "Do you want to copy media? [y/N] ";
     } while (std::getline(std::cin, option_string) && !optionIsValid(option_string));
     option_bool = setOption(option_string);
-    
-    std::cout << "Copying Facebook " << (option_bool ? "messsages and media" : "messsages") << " from " << start_path << " to " << final_path << ".\n";
 
-    std::cout << "Working";
+    do {
+        std::cout << "Do you want to copy End-to-end-encrypted chats? [y/N] ";
+    } while (std::getline(std::cin, e2ee_string) && !optionIsValid(e2ee_string));
+    e2ee_bool = setOption(e2ee_string);
+    
+    std::cout << "Copying Facebook " << (option_bool ? "media and messages" : "messsages") << (e2ee_bool ? " (including end-to-end-encrypted chats)" : "") << " from " << start_path << " to " << final_path << ".\n" << "Working";
 
     for (const auto& package_iterator : fs::directory_iterator{start_path}) 
     {
@@ -70,39 +83,79 @@ int main()
 
         if (fs::exists(inbox_path))
         {
-            for (auto const& group_iterator : fs::directory_iterator{inbox_path}) 
+            for (const auto& group_iterator : fs::directory_iterator{inbox_path}) 
             {
                 fs::path group_start_path = group_iterator.path();
                 fs::path curr_group = getLastDir(group_start_path);
                 fs::path group_final_path = concatPath(final_path, curr_group);
 
-                fs::current_path(final_path);
-                fs::create_directory(curr_group);
+                if (!fs::exists(group_final_path))
+                {
+                    fs::current_path(final_path);
+                    fs::create_directory(curr_group);
+                }
 
-                for (auto const& media_iterator : fs::directory_iterator{group_start_path}) 
+                for (const auto& media_iterator : fs::directory_iterator{group_start_path}) 
                 {
                     fs::path media_group_start_path = media_iterator.path();
                     fs::path curr_media = getLastDir(media_group_start_path); 
                     fs::path media_group_final_path = concatPath(group_final_path, curr_media);
 
-                    if (curr_media != "message_1.html")
+                    if (isMessageFile(curr_media))
+                        fs::copy(media_group_start_path, group_final_path, fs::copy_options::skip_existing);
+                    else if (option_bool)
                     {
                         fs::current_path(group_final_path);
 
-                        if (!fs::exists(media_group_final_path) && option_bool)
+                        if (!fs::exists(media_group_final_path))
                             fs::create_directory(curr_media);
 
-                        if (fs::exists(media_group_start_path) && option_bool)
+                        if (fs::exists(media_group_start_path))
                             fs::copy(media_group_start_path, media_group_final_path, fs::copy_options::skip_existing);
                     }
-                    else
-                        if (fs::exists(media_group_start_path) && fs::exists(group_final_path))
-                            fs::copy(media_group_start_path, group_final_path, fs::copy_options::skip_existing);
                 }
             }
         }
         else
-            std::cout << "\nThe package " << inbox_path << " doesn't have the expected format." << '\n';
+            std::cout << "\nThe package " << inbox_path << " doesn't have the expected format." << "\nContinuing.";
+
+        fs::path e2ee_path = concatPathToE2EE(package_iterator.path());
+
+        if (e2ee_bool && fs::exists(e2ee_path))
+        {
+            for (const auto& chat_iterator : fs::directory_iterator{e2ee_path})
+            {
+                fs::path chat_start_path = chat_iterator.path();
+                fs::path curr_chat = getLastDir(chat_start_path);
+                fs::path chat_final_path = concatPath(final_path, curr_chat);
+
+                if (!fs::exists(chat_final_path))
+                {
+                    fs::current_path(final_path);
+                    fs::create_directory(curr_chat);
+                }
+
+                for (const auto& media_iterator : fs::directory_iterator{chat_start_path}) 
+                {
+                    fs::path media_chat_start_path = media_iterator.path();
+                    fs::path curr_media = getLastDir(media_chat_start_path); 
+                    fs::path media_chat_final_path = concatPath(chat_final_path, curr_media);
+
+                    if (isMessageFile(curr_media))
+                        fs::copy(media_chat_start_path, chat_final_path, fs::copy_options::skip_existing);
+                    else 
+                    {
+                        fs::current_path(chat_final_path);
+
+                        if (!fs::exists(media_chat_final_path))
+                            fs::create_directory(curr_media);
+
+                        if (fs::exists(media_chat_start_path))
+                            fs::copy(media_chat_start_path, media_chat_final_path, fs::copy_options::skip_existing);
+                    }
+                }
+            }
+        }
     }
 
     std::cout << "\nDone!";
