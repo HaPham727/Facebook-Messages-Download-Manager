@@ -5,25 +5,21 @@
 
 namespace fs = std::filesystem;
 
-fs::path getLastDir(fs::path p)
+fs::path concatPathWithLastDir(fs::path p, fs::path d)
 {
-    p += "\\";
-    return p.parent_path().filename();
-}
-
-fs::path concatPath(fs::path p, fs::path d)
-{
-    return (p / d);
+    fs::path o = d;
+    o += "\\";
+    return (p / (o.parent_path().filename()));
 }
 
 fs::path concatPathToInbox(fs::path p)
 {
-    return concatPath(p, "your_facebook_activity\\messages\\inbox");
+    return (p / "your_facebook_activity\\messages\\inbox");
 }
 
 fs::path concatPathToE2EE(fs::path p)
 {
-    return concatPath(p, "your_facebook_activity\\messages\\e2ee_cutover");
+    return (p / "your_facebook_activity\\messages\\e2ee_cutover");
 }
 
 bool pathExists(std::string str)
@@ -90,7 +86,7 @@ int main()
             for (const auto& group_iterator : fs::directory_iterator{inbox_path}) 
             {
                 fs::path group_start_path = group_iterator.path();
-                fs::path group_final_path = concatPath(final_path, getLastDir(group_start_path));
+                fs::path group_final_path = concatPathWithLastDir(final_path, group_start_path);
 
                 if (!fs::exists(group_final_path))
                     fs::create_directory(group_final_path);
@@ -98,7 +94,7 @@ int main()
                 for (const auto& media_iterator : fs::directory_iterator{group_start_path}) 
                 {
                     fs::path media_group_start_path = media_iterator.path();
-                    fs::path media_group_final_path = concatPath(group_final_path, getLastDir(media_group_start_path));
+                    fs::path media_group_final_path = concatPathWithLastDir(group_final_path, media_group_start_path);
 
                     if (isMessageFile(media_group_start_path))
                         fs::copy(media_group_start_path, group_final_path, message_copy_options);
@@ -120,7 +116,7 @@ int main()
             for (const auto& chat_iterator : fs::directory_iterator{e2ee_path})
             {
                 fs::path chat_start_path = chat_iterator.path();
-                fs::path chat_final_path = concatPath(final_path, getLastDir(chat_start_path));
+                fs::path chat_final_path = concatPathWithLastDir(final_path, chat_start_path);
 
                 if (!fs::exists(chat_final_path))
                     fs::create_directory(chat_final_path);
@@ -128,7 +124,7 @@ int main()
                 for (const auto& media_iterator : fs::directory_iterator{chat_start_path}) 
                 {
                     fs::path media_chat_start_path = media_iterator.path();
-                    fs::path media_chat_final_path = concatPath(chat_final_path, getLastDir(media_chat_start_path));
+                    fs::path media_chat_final_path = concatPathWithLastDir(chat_final_path, media_chat_start_path);
 
                     if (isMessageFile(media_chat_start_path))
                         fs::copy(media_chat_start_path, chat_final_path, message_copy_options);
