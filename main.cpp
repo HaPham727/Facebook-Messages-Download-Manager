@@ -1,4 +1,4 @@
-#include <chrono>
+//#include <chrono>
 #include <iostream>
 #include <filesystem>
 #include <string>
@@ -10,16 +10,6 @@ fs::path concatPathWithLastDir(fs::path p, fs::path d)
     fs::path o = d;
     o += "\\";
     return (p / (o.parent_path().filename()));
-}
-
-fs::path concatPathToInbox(fs::path p)
-{
-    return (p / "your_facebook_activity\\messages\\inbox");
-}
-
-fs::path concatPathToE2EE(fs::path p)
-{
-    return (p / "your_facebook_activity\\messages\\e2ee_cutover");
 }
 
 bool pathExists(std::string str)
@@ -44,8 +34,6 @@ bool isMessageFile(fs::path p)
 
 int main()
 {
-    auto start = std::chrono::high_resolution_clock::now();
-
     std::string start_string, final_string, media_string, e2ee_string;
     fs::path start_path, final_path;
     fs::copy_options message_copy_options = fs::copy_options::skip_existing;
@@ -78,8 +66,8 @@ int main()
     {
         std::cout << '.';
 
-        fs::path inbox_path = concatPathToInbox(package_iterator.path());
-        fs::path e2ee_path = concatPathToE2EE(package_iterator.path());
+        fs::path inbox_path = (package_iterator.path() / "your_facebook_activity\\messages\\inbox");
+        fs::path e2ee_path = (package_iterator.path() / "your_facebook_activity\\messages\\e2ee_cutover");
 
         if (fs::exists(inbox_path))
         {
@@ -139,10 +127,8 @@ int main()
             }
         }
     }
-    
-    auto stop = std::chrono::high_resolution_clock::now();
 
-    std::cout << "\nFinished after " << duration_cast<std::chrono::seconds>(stop - start) << "!";
+    std::cout << "\nDone";
 
     return 0;
 }
